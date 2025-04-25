@@ -60,7 +60,7 @@
       -d '{
               "login": "your_login",
               "password": "your_password_hash"
-      }'
+          }'
       ```
     - **Responses:**
       - HTTP 200 Пользователь <login> успешно авторизован.
@@ -115,7 +115,7 @@
       -H "auth-token: your_auth_token" \
       -d '{
           "name": "new_file_name"
-      }'
+          }'
       ```
     - **Responses:**
       - HTTP 200 У файла с именем <fileName> успешно изменено имя файла на <newFileName>.

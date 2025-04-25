@@ -61,7 +61,8 @@
     }
     ```
   - Response:
-    ```{
-            "auth-token": "string"
+    ```
+    {
+        "auth-token": "string"
     }
     ```

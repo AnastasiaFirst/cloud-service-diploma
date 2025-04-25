@@ -54,9 +54,14 @@
 - POST /login
   - Description: Вход по логину и паролю.
   - Request Body:
-    ```{
-    "login": "string",
-    "password": "string"}```
+    ```
+    {
+        "login": "string",
+        "password": "string"
+    }
+    ```
   - Response:
     ```{
-    "auth-token": "string"}```
+            "auth-token": "string"
+    }
+    ```

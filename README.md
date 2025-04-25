@@ -53,16 +53,16 @@
 ### Сервис авторизации
 - **POST /login**
   - **Description:** Вход по логину и паролю.
-  - **cURL:**
-    ```
-    curl -X POST http://localhost:8080/cloud/login \
-    -H "Content-Type: application/json" \
-    -d '{
-        "login": "your_login",
-        "password": "your_password_hash"
-    }'
-    ```
-  - **Responses:**
+    - **cURL:**
+      ```
+      curl -X POST http://localhost:8080/cloud/login \
+      -H "Content-Type: application/json" \
+      -d '{
+              "login": "your_login",
+              "password": "your_password_hash"
+      }'
+      ```
+    - **Responses:**
       - HTTP 200 Пользователь <login> успешно авторизован.
         ```
         {
@@ -72,35 +72,35 @@
       - HTTP 400 Неправильный пароль
 - **POST /logout**
   - **Description:** Выход из учетной записи пользователя, используя токен.
-  - **cURL:**
-    ```
-    curl -X POST http://localhost:8080/cloud/logout \
-    -H "Content-Type: application/json" \
-    -H "auth-token: your_auth_token"
-    ```
-  - **Responses:**
+    - **cURL:**
+      ```
+      curl -X POST http://localhost:8080/cloud/logout \
+      -H "Content-Type: application/json" \
+      -H "auth-token: your_auth_token"
+      ```
+    - **Responses:**
       - HTTP 200 OK.
 ### Сервис управления файлами пользователя
 - **POST /file**
   - **Description:** Добавление нового файла
-  - **cURL:**
-    ```
-    curl -X POST http://localhost:8080/cloud/file?filename=your_file_name.txt \
-    -H "auth-token: your_auth_token" \
-    -F "hash=your_file_hash" \
-    -F "file=@/path/to/your/file.txt"
-    ```
-  - **Responses:**
+    - **cURL:**
+      ```
+      curl -X POST http://localhost:8080/cloud/file?filename=your_file_name.txt \
+      -H "auth-token: your_auth_token" \
+      -F "hash=your_file_hash" \
+      -F "file=@/path/to/your/file.txt"
+      ```
+    - **Responses:**
       - HTTP 200 Файл с именем <fileName> успешно добавлен.
       - HTTP 400 Файл с таким именем: <fileName> уже существует для <userID>
       - HTTP 401 Пользователь <userID> не авторизован.
 - **GET /file**
   - **Description:** Загрузка файла с сервера
     - **cURL:**
-    ```
-    curl -X GET http://localhost:8080/cloud/file?filename=your_filename \
-    -H "auth-token: your_auth_token"
-    ```
+      ```
+      curl -X GET http://localhost:8080/cloud/file?filename=your_filename \
+      -H "auth-token: your_auth_token"
+      ```
     - **Responses:**
       - HTTP 200 Ok.
       - HTTP 400 Файл с именем: <fileName> не найден

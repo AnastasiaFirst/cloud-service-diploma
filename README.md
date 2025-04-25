@@ -56,9 +56,7 @@
   - Request Body:
     ```{
     "login": "string",
-    "password": "string"
-}```
+    "password": "string"}```
   - Response:
     ```{
-    "auth-token": "string"
-}```
+    "auth-token": "string"}```

@@ -60,9 +60,12 @@
         "password": "string"
     }
     ```
-  - **Response:**
-    ```
-    {
-        "auth-token": "string"
-    }
-    ```
+  - **Responses:**
+      - HTTP 200
+        ```
+        Пользователь <login> успешно авторизован.
+        ```
+      - HTTP 400
+        ```
+        Неправильный пароль
+        ```

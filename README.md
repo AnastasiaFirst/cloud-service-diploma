@@ -51,16 +51,16 @@
 
 ## REST API
 ### Сервис авторизации
-- POST /login
-  - Description: Вход по логину и паролю.
-  - Request Body:
+- **POST /login**
+  - **Description:** Вход по логину и паролю.
+  - **Request Body:**
     ```
     {
         "login": "string",
         "password": "string"
     }
     ```
-  - Response:
+  - **Response:**
     ```
     {
         "auth-token": "string"

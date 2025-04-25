@@ -53,12 +53,14 @@
 ### Сервис авторизации
 - **POST /login**
   - **Description:** Вход по логину и паролю.
-  - **Request Body:**
+  - **cURL:**
     ```
-    {
-        "login": "string",
-        "password": "string"
-    }
+    curl -X POST http://localhost:8080/cloud/login \
+    -H "Content-Type: application/json" \
+    -d '{
+        "login": "your_login",
+        "password": "your_password_hash"
+    }'
     ```
   - **Responses:**
       - HTTP 200 Пользователь <login> успешно авторизован.
@@ -68,3 +70,79 @@
         }
         ```
       - HTTP 400 Неправильный пароль
+- **POST /logout**
+  - **Description:** Выход из учетной записи пользователя, используя токен.
+  - **cURL:**
+    ```
+    curl -X POST http://localhost:8080/cloud/logout \
+    -H "Content-Type: application/json" \
+    -H "auth-token: your_auth_token"
+    ```
+  - **Responses:**
+      - HTTP 200 OK.
+### Сервис управления файлами пользователя
+- **POST /file**
+  - **Description:** Добавление нового файла
+  - **cURL:**
+    ```
+    curl -X POST http://localhost:8080/cloud/file?filename=your_file_name.txt \
+    -H "auth-token: your_auth_token" \
+    -F "hash=your_file_hash" \
+    -F "file=@/path/to/your/file.txt"
+    ```
+  - **Responses:**
+      - HTTP 200 Файл с именем <fileName> успешно добавлен.
+      - HTTP 400 Файл с таким именем: <fileName> уже существует для <userID>
+      - HTTP 401 Пользователь <userID> не авторизован.
+- **GET /file**
+  - **Description:** Загрузка файла с сервера
+    - **cURL:**
+    ```
+    curl -X GET http://localhost:8080/cloud/file?filename=your_filename \
+    -H "auth-token: your_auth_token"
+    ```
+    - **Responses:**
+      - HTTP 200 Ok.
+      - HTTP 400 Файл с именем: <fileName> не найден
+      - HTTP 401 Пользователь <userID> не авторизован.
+      - HTTP 500 Произошла ошибка при обработке запроса. Пожалуйста, попробуйте позже.
+- **PUT /file**
+  - **Description:** Изменение имени файла
+    - **cURL:**
+      ```
+      curl -X PUT http://localhost:8080/cloud/file?filename=your_filename \
+      -H "Content-Type: application/json" \
+      -H "auth-token: your_auth_token" \
+      -d '{
+          "name": "new_file_name"
+      }'
+      ```
+    - **Responses:**
+      - HTTP 200 У файла с именем <fileName> успешно изменено имя файла на <newFileName>.
+      - HTTP 400 Некорректные входные данные: имя файла не может быть пустым
+      - HTTP 401 Пользователь <userID> не авторизован.
+      - HTTP 500 Файл с таким именем: <fileName> уже существует.
+- **DELETE /file**
+  - **Description:** Удаление файла
+    - **cURL:**
+      ```
+      curl -X DELETE http://localhost:8080/cloud/file?filename=your_filename \
+      -H "auth-token: your_auth_token"
+      ```
+    - **Responses:**
+      - HTTP 200 Файл с именем: <fileName> успешно удален.
+      - HTTP 400 Файл с именем: <fileName> не найден
+      - HTTP 401 Пользователь <userID> не авторизован.
+      - HTTP 500 Не удалось удалить файл с именем: <fileName>
+**GET /list**
+  - **Description:** Получение списка файлов
+    - **cURL:**
+      ```
+      curl -X GET http://localhost:8080/cloud/list?limit=10 \
+      -H "auth-token: your_auth_token"
+      ```
+    - **Responses:**
+      - HTTP 200 Ok.
+      - HTTP 400 Лимит должен быть больше нуля.
+      - HTTP 401 Пользователь <userID> не авторизован.
+      - HTTP 500 Не удалось получить список файлов.
